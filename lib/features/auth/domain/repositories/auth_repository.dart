@@ -1,15 +1,16 @@
 
-import 'package:blog_app/utils/typedef.dart';
+import 'package:blog_app/core/utils/typedef.dart';
+import 'package:blog_app/features/auth/domain/entities/user.dart';
 
 
 abstract interface class AuthRepository {
-  ResultFuture<String> signUp({
+  ResultFuture<User> signUp({
     required String name,
     required String email,
     required String password,
   });
 
-  ResultFuture<String> signIn({
+  ResultFuture<User> signIn({
     required String email,
     required String password,
   });

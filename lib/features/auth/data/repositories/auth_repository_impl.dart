@@ -1,8 +1,9 @@
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:blog_app/features/auth/data/models/user_model.dart';
 import 'package:blog_app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:blog_app/utils/typedef.dart';
+import 'package:blog_app/core/utils/typedef.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -10,22 +11,28 @@ class AuthRepositoryImpl implements AuthRepository {
 
   AuthRepositoryImpl(this.authRemoteDataSource);
   @override
-  ResultFuture<String> signIn(
-      {required String email, required String password}) {
-    // TODO: implement signIn
-    throw UnimplementedError();
+  ResultFuture<UserModel> signIn(
+      {required String email, required String password})async {
+    try {
+      final user = await authRemoteDataSource.signIn(
+           email: email, password: password);
+
+      return right(user);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
   }
 
   @override
-  ResultFuture<String> signUp(
+  ResultFuture<UserModel> signUp(
       {required String name,
       required String email,
       required String password}) async {
     try {
-      final userId = await authRemoteDataSource.signUp(
+      final user = await authRemoteDataSource.signUp(
           name: name, email: email, password: password);
 
-      return right(userId);
+      return right(user);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
