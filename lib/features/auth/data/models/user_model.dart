@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:blog_app/features/auth/domain/entities/user.dart';
+import 'package:blog_app/core/common/entities/user.dart';
 
 class UserModel extends User {
   UserModel({required super.id, required super.email, required super.name, });
@@ -28,7 +28,7 @@ class UserModel extends User {
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  User copyWith({
+  UserModel copyWith({
     String? id,
     String? name,
     String? email,

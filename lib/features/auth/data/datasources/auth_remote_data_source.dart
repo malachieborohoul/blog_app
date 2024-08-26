@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/features/auth/data/models/user_model.dart';
@@ -76,7 +75,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
             .from('profiles')
             .select()
             .eq('id', currentUserSession!.user.id);
-        return UserModel.fromMap(userData.first);
+        return UserModel.fromMap(userData.first).copyWith(
+          email: currentUserSession!.user.email
+        );
       }
 
       return null;
