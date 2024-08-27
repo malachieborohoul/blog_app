@@ -1,6 +1,7 @@
 // import 'package:blog_app/core/utils/calculate_reading_time.dart';
+import 'package:blog_app/core/utils/calculate_reading_time.dart';
 import 'package:blog_app/features/blog/domain/entities/blog.dart';
-// import 'package:blog_app/features/blog/presentation/pages/blog_viewer_page.dart';
+import 'package:blog_app/features/blog/presentation/pages/blog_viewer_page.dart';
 import 'package:flutter/material.dart';
 
 class BlogCard extends StatelessWidget {
@@ -16,7 +17,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(context, BlogViewerPage.route(blog));
+        Navigator.push(context, BlogViewerPage.route(blog));
       },
       child: Container(
         height: 200,
@@ -57,7 +58,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Text('${calculateReadingTime(blog.content)} min'),
+            Text('${calculateReadingTime(blog.content)} min'),
           ],
         ),
       ),
